@@ -1,0 +1,55 @@
+#@prefix : <http://example.org/traffic#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ontoroad: <http://ontology.ontoroad.org/> .
+
+:TrafficOntology rdf:type owl:Ontology .
+
+### Classes
+:TrafficSensor rdf:type owl:Class ;
+    rdfs:subClassOf sosa:Sensor .
+
+:TrafficObservation rdf:type owl:Class ;
+    rdfs:subClassOf sosa:Observation .
+
+
+### Properties
+:hasObservation rdf:type owl:ObjectProperty ;
+    rdfs:domain :TrafficSensor ;
+    rdfs:range :TrafficObservation ;
+    rdfs:comment "Links a traffic sensor to the traffic observation it made." .
+	
+:roadType rdf:type owl:ObjectProperty ;
+    rdfs:domain :TrafficSensor ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Specifies the type of the road the sensor is monitoring (e.g., highway, residential)." .
+	
+:maxSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TrafficSensor ;
+    rdfs:range xsd:float ;
+    rdfs:comment "Specifies the maximum speed limit for the road where the sensor is located." .
+
+:networkDistance rdf:type owl:ObjectProperty ;
+    rdfs:domain :TrafficSensor ;
+    rdfs:range :TrafficSensor ;
+    rdfs:comment "Represents the distance between two sensors in the road network." .
+
+:hasSpeed rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TrafficObservation ;
+    rdfs:range xsd:float ;
+    rdfs:comment "Records the observed speed at a sensor location." .
+
+:distanceValue rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TrafficSensor ;
+    rdfs:range xsd:float ;
+    rdfs:comment "Stores the network distance between sensors." .
+
+:distanceUnit rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TrafficSensor ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Specifies the unit for distance (e.g., meters)." .
+	
